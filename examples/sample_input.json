@@ -1,0 +1,60 @@
+{
+  "business_config": {
+    "name": "Sunny Bakery",
+    "hours": "07:00-19:00",
+    "staffing": 5,
+    "capacity": 30,
+    "operating_days": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    "preferences": {
+      "risk_tolerance": "medium",
+      "growth_focus": true
+    }
+  },
+  "industry_profile": {
+    "industry_type": "bakery",
+    "tone": "supportive",
+    "assumptions": {
+      "daily_sales_variability": "medium",
+      "inventory_shelf_life_days": 3
+    },
+    "signal_priorities": ["revenue_change", "inventory_risk", "traffic_change"]
+  },
+  "metrics": {
+    "date": "2026-02-08",
+    "sales": 540.75,
+    "traffic": 120,
+    "inventory": {
+      "bread": 15,
+      "croissant": 8,
+      "muffin": 12
+    },
+    "reservations": 5,
+    "other_metrics": {
+      "social_media_engagement": 25
+    }
+  },
+  "historical_metrics": [
+    {
+      "date": "2026-02-07",
+      "sales": 600.50,
+      "traffic": 130,
+      "inventory": {
+        "bread": 10,
+        "croissant": 12,
+        "muffin": 15
+      },
+      "reservations": 7
+    },
+    {
+      "date": "2026-02-06",
+      "sales": 580.20,
+      "traffic": 125,
+      "inventory": {
+        "bread": 12,
+        "croissant": 10,
+        "muffin": 14
+      },
+      "reservations": 6
+    }
+  ]
+}

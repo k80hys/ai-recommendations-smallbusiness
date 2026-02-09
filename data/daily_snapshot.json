@@ -1,0 +1,105 @@
+{
+  "business_config": {
+    "name": "Neighborhood Cookie Bakery",
+    "hours": "07:00-19:00",
+    "staffing": 3,
+    "capacity": 25,
+    "operating_days": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    "preferences": {
+      "risk_tolerance": "medium",
+      "growth_focus": true
+    }
+  },
+  "industry_profile": {
+    "industry_type": "bakery",
+    "tone": "supportive",
+    "assumptions": {
+      "daily_sales_variability": "medium",
+      "inventory_shelf_life_days": 3
+    },
+    "signal_priorities": ["revenue_change", "inventory_risk", "traffic_change"]
+  },
+  "metrics": {
+    "date": "2026-02-08",
+    "sales": 910.40,
+    "traffic": 95,
+    "inventory": {
+      "chocolate_chip_cookie": 50,
+      "oatmeal_raisin_cookie": 25,
+      "sugar_cookie": 20,
+      "brownie": 18,
+      "gift_box": 5
+    },
+    "reservations": 4,
+    "other_metrics": {
+      "transactions": 42,
+      "average_ticket": 21.68,
+      "tips": 50.00,
+      "refunds": 2.50,
+      "returning_customers": 11,
+      "new_customers": 31,
+      "online_orders": 15,
+      "in_person_orders": 27,
+      "scheduled_staff": 3,
+      "actual_staff_present": 3,
+      "staff_hours_worked": 24,
+      "low_stock_items": ["gift_box"]
+    }
+  },
+  "historical_metrics": [
+    {
+      "date": "2026-02-06",
+      "sales": 925.75,
+      "traffic": 92,
+      "inventory": {
+        "chocolate_chip_cookie": 45,
+        "oatmeal_raisin_cookie": 30,
+        "sugar_cookie": 25,
+        "brownie": 15,
+        "gift_box": 8
+      },
+      "reservations": null,
+      "other_metrics": {
+        "transactions": 40,
+        "average_ticket": 23.14,
+        "tips": 45.00,
+        "refunds": 5.50,
+        "returning_customers": 10,
+        "new_customers": 28,
+        "online_orders": 12,
+        "in_person_orders": 28,
+        "scheduled_staff": 3,
+        "actual_staff_present": 3,
+        "staff_hours_worked": 24,
+        "low_stock_items": ["chocolate_chip_cookie", "gift_box"]
+      }
+    },
+    {
+      "date": "2026-02-07",
+      "sales": 880.20,
+      "traffic": 85,
+      "inventory": {
+        "chocolate_chip_cookie": 40,
+        "oatmeal_raisin_cookie": 28,
+        "sugar_cookie": 20,
+        "brownie": 18,
+        "gift_box": 5
+      },
+      "reservations": 3,
+      "other_metrics": {
+        "transactions": 38,
+        "average_ticket": 23.16,
+        "tips": 40.00,
+        "refunds": 3.00,
+        "returning_customers": 12,
+        "new_customers": 26,
+        "online_orders": 10,
+        "in_person_orders": 28,
+        "scheduled_staff": 3,
+        "actual_staff_present": 3,
+        "staff_hours_worked": 24,
+        "low_stock_items": ["sugar_cookie", "gift_box"]
+      }
+    }
+  ]
+}
