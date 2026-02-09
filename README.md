@@ -6,7 +6,7 @@
 
 ## Overview
 
-This project is a prototype AI-native decision system designed to help small business owners turn daily operational metrics into actionable, prioritized recommendations.  
+This project is a prototype AI-powered decision system designed to help small business owners turn daily operational metrics into actionable, prioritized recommendations for a business like my brother's bakery, Hayes Baked Goods.  
 
 It showcases a **three-agent architecture** that separates reasoning into interpretable stages:  
 
@@ -14,25 +14,25 @@ It showcases a **three-agent architecture** that separates reasoning into interp
 - **Decision Agent** – transforms observations into actionable recommendations  
 - **Reviewer Agent** – evaluates recommendations, providing confidence scores and contextual notes  
 
-The goal is **not to replace human judgment**, but to reduce cognitive load, surface reliable recommendations quickly, and illustrate scalable AI-native decision workflows.
+The goal is **not to replace human judgment**, but to reduce cognitive load and surface practical, reliable recommendations quickly, in a format that will resonate with restaurant managers, lead bartenders, bakers, or other food and beverage business decision-makers.
 
 ---
 
 ## Problem
 Small businesses face daily challenges:  
 
-- Tracking and interpreting multiple metrics (sales, traffic, inventory)  
-- Prioritizing actions amid fluctuating demand and operational constraints  
-- Making decisions while balancing risk, staffing, and customer experience  
+- Tracking and interpreting a flurry of numbers (sales, traffic, inventory)
+- Prioritizing actions amid conditions that fluctuate at the drop of a hat
+- Making decisions while balancing risk, staffing, and customer experience
 
-This system demonstrates a structured AI-native workflow for turning **signals into decisions** while mitigating AI hallucination risks.
+This system demonstrates a structured AI-centric workflow for turning **signals into decisions** while mitigating LLM hallucination risks at every step.
 
 ---
 
 ## Scope
 - **Business example:** Small bakery (e.g., Hayes Baked Goods)  
 - **Decision horizon:** Daily  
-- **Inputs:** Daily metrics (sales, traffic, inventory) and business configuration  
+- **Inputs:** Daily metrics (modeled on Square POS) and business configuration  
 - **Outputs:** Ranked, actionable recommendations with confidence and notes  
 - **Design:** Lightweight, reproducible, and easily extendable to other small business types  
 
@@ -42,7 +42,7 @@ This system demonstrates a structured AI-native workflow for turning **signals i
 
       ┌──────────────────┐
       │  Daily Metrics   │
-      │  (sales, traffic,│
+      │  (sales, schedule,│
       │   inventory, etc.)│
       └────────┬─────────┘
                │
@@ -77,7 +77,7 @@ This system demonstrates a structured AI-native workflow for turning **signals i
 - Stepwise reasoning: **Observations → Actions → Confidence**  
 - Guardrails: schema validation and constrained signal values  
 - Human-in-the-loop ready: outputs are interpretable and reversible  
-- Clear AI- workflow: each agent has a distinct responsibility  
+- Clear workflow: each agent has a distinct responsibility  
 
 ---
 
@@ -108,14 +108,13 @@ Daily metrics are stored in `data/daily_snapshot.json`. Example structure:
     "inventory": {"bread": 15,"croissant": 8,"muffin": 12}
   }
 }
+```
 
 See `schemas.py` for full definitions and validation logic.
 
 ## Example Output
 
-The system generates a `DailyDecisionBrief` with prioritized, actionable recommendations.  
-
-### JSON Example
+The system generates a `DailyDecisionBrief` with prioritized, actionable recommendations. Example structure: 
 
 ```json
 {
@@ -129,9 +128,11 @@ The system generates a `DailyDecisionBrief` with prioritized, actionable recomme
     }
   ]
 }
+```
 
 ## Console Output Example
 
+```
 ### Focus production on top 2 products
 - **Reason:** Revenue decline combined with concentration in top product  
 - **Confidence:** Medium  
@@ -144,14 +145,15 @@ The system generates a `DailyDecisionBrief` with prioritized, actionable recomme
 ### Limit new custom orders this week
 - **Reason:** High operational load could affect quality and delivery  
 - **Confidence:** Medium  
+```
 
 ---
 
 ## Key Technical Highlights
-- **AI-native design:** Multi-agent system separates analysis, decision-making, and review  
-- **Robust input handling:** Pydantic schemas ensure metrics and signals are reliable  
-- **Rule-based reasoning with AI augmentation:** Actions are deterministic, reproducible, and interpretable  
+- **Designed with AI at the core:** Multi-agent system separates analysis, decision-making, and review
+- **Reasoning that will resonate with a small business owner:** Actions are deterministic, reproducible, and interpretable
 - **Customizable industry profiles:** Add industry-specific assumptions, priorities, and recommendation logic  
+- **Robust input handling:** Pydantic schemas ensure metrics and signals are reliable  
 - **LLM integration-ready:** Easily swap `MockLLMClient` for OpenAI, Anthropic, or local models  
 
 ---
@@ -205,7 +207,7 @@ ai-decision-agent/
 │   └── reviewer_agent.py     # Actions → Reviews
 ├── preprocessing/
 │   └── validate_metrics.py   # Input validation
-├── industry_profiles/
+├── industry_profiles/        # To be built out in future versions
 │   ├── base.py
 │   ├── bakery.py
 │   └── bar.py
