@@ -1,65 +1,89 @@
 # AI-Agent-Driven Recommendations for Small Businesses
+**Author:** Katie Hayes  
+**Role Demonstrated:** AI-Native Product Management / Decision Support 
 
-An intelligent decision-support system for small businesses that analyzes daily metrics and provides actionable recommendations through a multi-agent AI pipeline.
+---
 
 ## Overview
 
-The AI Decision Agent processes daily business metrics through a three-stage pipeline to generate prioritized, actionable recommendations:
+This project is a prototype AI-native decision system designed to help small business owners turn daily operational metrics into actionable, prioritized recommendations.  
 
-1. **Analyst Agent** - Converts raw metrics into structured observations and signals
-2. **Decision Agent** - Transforms observations into specific, actionable recommendations  
-3. **Reviewer Agent** - Reviews and validates recommendations with confidence scores
+It showcases a **three-agent architecture** that separates reasoning into interpretable stages:  
+
+- **Analyst Agent** – converts raw metrics into structured observations and signals  
+- **Decision Agent** – transforms observations into actionable recommendations  
+- **Reviewer Agent** – evaluates recommendations, providing confidence scores and contextual notes  
+
+The goal is **not to replace human judgment**, but to reduce cognitive load, surface reliable recommendations quickly, and illustrate scalable AI-native decision workflows.
+
+---
+
+## Problem
+Small businesses face daily challenges:  
+
+- Tracking and interpreting multiple metrics (sales, traffic, inventory)  
+- Prioritizing actions amid fluctuating demand and operational constraints  
+- Making decisions while balancing risk, staffing, and customer experience  
+
+This system demonstrates a structured AI-native workflow for turning **signals into decisions** while mitigating AI hallucination risks.
+
+---
+
+## Scope
+- **Business example:** Small bakery (e.g., Hayes Baked Goods)  
+- **Decision horizon:** Daily  
+- **Inputs:** Daily metrics (sales, traffic, inventory) and business configuration  
+- **Outputs:** Ranked, actionable recommendations with confidence and notes  
+- **Design:** Lightweight, reproducible, and easily extendable to other small business types  
+
+---
 
 ## Architecture
 
-```
-Daily Metrics → Analyst Agent → Decision Agent → Reviewer Agent → Daily Decision Brief
-```
+      ┌──────────────────┐
+      │  Daily Metrics   │
+      │  (sales, traffic,│
+      │   inventory, etc.)│
+      └────────┬─────────┘
+               │
+               ▼
+      ┌──────────────────┐
+      │  Analyst Agent   │
+      │  (Observations & │
+      │   Signals)       │
+      └────────┬─────────┘
+               │
+               ▼
+      ┌──────────────────┐
+      │ Decision Agent   │
+      │ (Actions &       │
+      │  Prioritization) │
+      └────────┬─────────┘
+               │
+               ▼
+      ┌──────────────────┐
+      │ Reviewer Agent   │
+      │ (Confidence &    │
+      │  Contextual Notes)│
+      └────────┬─────────┘
+               │
+               ▼
+      ┌──────────────────┐
+      │ Daily Decision   │
+      │ Brief (Output)   │
+      └──────────────────┘
 
-### Components
+**Design Highlights:**  
+- Stepwise reasoning: **Observations → Actions → Confidence**  
+- Guardrails: schema validation and constrained signal values  
+- Human-in-the-loop ready: outputs are interpretable and reversible  
+- Clear AI- workflow: each agent has a distinct responsibility  
 
-- **`schemas.py`** - Pydantic models defining the data structures
-- **`agents/`** - The three-agent pipeline (analyst, decision, reviewer)
-- **`preprocessing/`** - Input validation and historical data management
-- **`industry_profiles/`** - Industry-specific configurations and assumptions
-- **`data/`** - Input metrics and generated outputs
-- **`run_decision_agent.py`** - Main pipeline orchestrator
+---
 
-## Quick Start
+## Input Data
 
-### Prerequisites
-
-- Python 3.8+
-- pip
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone <your-repo-url>
-cd ai-decision-agent
-```
-
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-### Running the Pipeline
-
-```bash
-python run_decision_agent.py
-```
-
-This will:
-- Load daily metrics from `data/daily_snapshot.json` (or create demo data if missing)
-- Process through the three-agent pipeline
-- Generate `data/daily_decision_brief.json` with actionable recommendations
-- Display results in the console
-
-## Input Data Format
-
-Place your daily metrics in `data/daily_snapshot.json`:
+Daily metrics are stored in `data/daily_snapshot.json`. Example structure:
 
 ```json
 {
@@ -68,31 +92,30 @@ Place your daily metrics in `data/daily_snapshot.json`:
     "hours": "08:00-20:00",
     "staffing": 5,
     "capacity": 50,
-    "operating_days": ["Mon", "Tue", "Wed", "Thu", "Fri"],
+    "operating_days": ["Mon","Tue","Wed","Thu","Fri"],
     "preferences": {"risk_tolerance": "medium"}
   },
   "industry_profile": {
     "industry_type": "bakery",
     "tone": "supportive",
     "assumptions": {},
-    "signal_priorities": ["revenue_change", "inventory_risk"]
+    "signal_priorities": ["revenue_change","inventory_risk"]
   },
   "metrics": {
     "date": "2026-02-08",
     "sales": 540.75,
     "traffic": 120,
-    "inventory": {
-      "bread": 15,
-      "croissant": 8,
-      "muffin": 12
-    }
+    "inventory": {"bread": 15,"croissant": 8,"muffin": 12}
   }
 }
-```
 
-## Output Format
+See `schemas.py` for full definitions and validation logic.
 
-The system generates a `DailyDecisionBrief` with prioritized actions:
+## Example Output
+
+The system generates a `DailyDecisionBrief` with prioritized, actionable recommendations.  
+
+### JSON Example
 
 ```json
 {
@@ -106,51 +129,66 @@ The system generates a `DailyDecisionBrief` with prioritized actions:
     }
   ]
 }
+
+## Console Output Example
+
+### Focus production on top 2 products
+- **Reason:** Revenue decline combined with concentration in top product  
+- **Confidence:** Medium  
+- **Notes:** Assumes decline is demand-driven, not seasonal  
+
+### Restock critical ingredients immediately
+- **Reason:** Inventory levels are low, risk of running out  
+- **Confidence:** High  
+
+### Limit new custom orders this week
+- **Reason:** High operational load could affect quality and delivery  
+- **Confidence:** Medium  
+
+---
+
+## Key Technical Highlights
+- **AI-native design:** Multi-agent system separates analysis, decision-making, and review  
+- **Robust input handling:** Pydantic schemas ensure metrics and signals are reliable  
+- **Rule-based reasoning with AI augmentation:** Actions are deterministic, reproducible, and interpretable  
+- **Customizable industry profiles:** Add industry-specific assumptions, priorities, and recommendation logic  
+- **LLM integration-ready:** Easily swap `MockLLMClient` for OpenAI, Anthropic, or local models  
+
+---
+
+## Future Enhancements
+- Connect to real business systems such as Square
+- Replace `MockLLMClient` with preferred LLM for full capability
+- Extend to multiple industry types - build out /industry_profiles section
+- Add event-driven automation to run the agent daily
+
+---
+
+## Reproducible Steps
+
+### Clone the repository
+
+```
+git clone https://github.com/k80hys/ai-decision-agent.git
+cd ai-decision-agent
 ```
 
-## Pipeline Details
+### Install dependencies
 
-### 1. Analyst Agent
-- **Input:** Daily metrics + historical data
-- **Output:** Structured observations and signals
-- **Purpose:** Identify patterns, changes, and noteworthy trends
-
-### 2. Decision Agent  
-- **Input:** Analyst signals + full business context
-- **Output:** Specific, actionable recommendations
-- **Purpose:** Convert observations into concrete business actions
-
-### 3. Reviewer Agent
-- **Input:** Proposed actions + business context
-- **Output:** Reviewed actions with confidence scores
-- **Purpose:** Validate recommendations and assess confidence levels
-
-## Customization
-
-### Industry Profiles
-Add industry-specific logic in `industry_profiles/`:
-- Custom business assumptions
-- Industry-specific signal priorities
-- Tailored recommendation patterns
-
-### LLM Integration
-Replace `MockLLMClient` in `run_decision_agent.py` with your preferred LLM:
-- OpenAI GPT models
-- Anthropic Claude
-- Local models via ollama/llama.cpp
-
-Example:
-```python
-from openai import OpenAI
-
-class OpenAIClient:
-    def __init__(self, api_key):
-        self.client = OpenAI(api_key=api_key)
-    
-    def generate(self, system_prompt: str, user_prompt: str) -> dict:
-        # Implement OpenAI API call
-        pass
 ```
+pip install -r requirements.txt
+```
+
+### Run the daily decision agent
+
+```
+python run_decision_agent.py
+```
+
+###Check the output
+
+- Check the console output for the Daily Decision Brief
+- Or view the generated output at `data/daily_decision_brief.json`
 
 ## File Structure
 
