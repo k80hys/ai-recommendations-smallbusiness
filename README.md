@@ -1,4 +1,4 @@
-# AI Decision Agent
+# AI-Agent-Driven Recommendations for Small Businesses
 
 An intelligent decision-support system for small businesses that analyzes daily metrics and provides actionable recommendations through a multi-agent AI pipeline.
 
